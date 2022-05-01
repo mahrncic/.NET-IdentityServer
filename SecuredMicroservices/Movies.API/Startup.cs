@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Movies.API.Data;
 
 namespace Movies.API
 {
@@ -31,6 +33,9 @@ namespace Movies.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Movies.API", Version = "v1" });
             });
+
+            services.AddDbContext<MoviesAPIContext>(options =>
+                    options.UseInMemoryDatabase("Movies"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
