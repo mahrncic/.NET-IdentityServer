@@ -1,3 +1,5 @@
+using IdentityServer4.Models;
+using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,7 +24,13 @@ namespace IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddIdentityServer()
+                .AddInMemoryClients(new List<Client>())
+                .AddInMemoryIdentityResources(new List<IdentityResource>())
+                .AddInMemoryApiResources(new List<ApiResource>())
+                .AddInMemoryApiScopes(new List<ApiScope>())
+                .AddTestUsers(new List<TestUser>())
+                .AddDeveloperSigningCredential();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -31,23 +39,10 @@ namespace IdentityServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseIdentityServer();
 
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
         }
     }
 }
