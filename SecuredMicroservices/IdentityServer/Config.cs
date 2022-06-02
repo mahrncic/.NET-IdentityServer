@@ -35,6 +35,8 @@ namespace IdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Address,
+                        IdentityServerConstants.StandardScopes.Email,
                         "movieAPI"
                     }
                 }
@@ -56,7 +58,9 @@ namespace IdentityServer
             new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Address(),
+                new IdentityResources.Email()
             };
 
         public static IEnumerable<TestUser> TestUsers =>
