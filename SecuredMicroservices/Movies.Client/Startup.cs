@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Net.Http.Headers;
 using Movies.Client.HttpHandlers;
 using IdentityModel.Client;
+using Microsoft.IdentityModel.Tokens;
+using IdentityModel;
 
 namespace Movies.Client
 {
@@ -50,10 +52,16 @@ namespace Movies.Client
                 options.Scope.Add("profile");
                 options.Scope.Add("address");
                 options.Scope.Add("email");
-
+                options.Scope.Add("roles");
                 options.Scope.Add("movieAPI");
 
                 options.SaveTokens = true;
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = JwtClaimTypes.GivenName,
+                    RoleClaimType = JwtClaimTypes.Role
+                };
 
                 options.GetClaimsFromUserInfoEndpoint = true;
             });
