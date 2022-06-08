@@ -26,7 +26,7 @@ namespace Movies.Client.ApiServices
         public async Task<Movie> CreateMovie(Movie movie)
         {
             var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/movies/");
+            var request = new HttpRequestMessage(HttpMethod.Post, "/movies/");
             request.Content = new StringContent(JsonConvert.SerializeObject(movie), encoding: Encoding.UTF8, "application/json");
 
             var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
@@ -41,7 +41,7 @@ namespace Movies.Client.ApiServices
         public async Task DeleteMovie(int id)
         {
             var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
-            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/movies/" + id);
+            var request = new HttpRequestMessage(HttpMethod.Delete, "/movies/" + id);
 
             var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -50,7 +50,7 @@ namespace Movies.Client.ApiServices
         public async Task<Movie> GetMovieById(int id)
         {
             var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/movies/" + id);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/movies/" + id);
 
             var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -64,7 +64,7 @@ namespace Movies.Client.ApiServices
         public async Task<IEnumerable<Movie>> GetMovies()
         {
             var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/movies/");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/movies/");
 
             var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -113,7 +113,7 @@ namespace Movies.Client.ApiServices
         public async Task<Movie> UpdateMovie(Movie movie)
         {
             var httpClient = _httpClientFactory.CreateClient("MovieAPIClient");
-            var request = new HttpRequestMessage(HttpMethod.Put, "/api/movies/" + movie.Id);
+            var request = new HttpRequestMessage(HttpMethod.Put, "/movies/" + movie.Id);
             request.Content = new StringContent(JsonConvert.SerializeObject(movie), encoding: Encoding.UTF8, "application/json");
 
             var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false);
